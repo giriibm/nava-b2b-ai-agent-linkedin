@@ -1,8 +1,29 @@
-# Nava AI Outbound Intelligence Platform
+# Nava AI Outbound Sales Intelligence Platform
 
 Working implementation of the Phase 1 MVP architecture described in the Master
 Product & Development Prompt: an AI-assisted B2B prospect intelligence
 platform with a mandatory human-approval gate before anything is sent.
+
+## Agent architecture
+
+The platform is built around a multi-agent pipeline, each agent a discrete,
+swappable unit behind the LLM Gateway. Phase 1 ships three of them; the rest
+are the planned build-out.
+
+| Agent | Role | Status |
+|---|---|---|
+| Prospect Discovery Agent | Finds companies/contacts matching an ICP (source: list import today, live discovery later) | Planned |
+| Company Research Agent | Researches a company and surfaces business challenges / AI opportunity areas | **Built** (`research_agent.py`) |
+| Lead Qualification Agent | Scores a contact against the ICP with reasoning | **Built** (`scoring_agent.py`, currently named Scoring) |
+| Email Personalization Agent | Drafts personalized email copy per contact | Partial — personalization agent supports LinkedIn today, email channel planned |
+| Email SDR Agent | Owns the outbound email send/sequencing flow | Planned |
+| LinkedIn Agent | Owns LinkedIn connection/message send flow | Partial — send path exists via HeyReach integration, not yet its own agent |
+| Follow-up Agent | Detects no-reply / reply signals and triggers next-step outreach | Planned |
+| CRM Agent | Syncs prospects, contacts, and activity to Salesforce | Interface defined, sync calls are `TODO` |
+| Analytics Agent | Reports on pipeline performance (response rates, conversion, agent accuracy) | Planned |
+| HITL Approval Service | Mandatory human approval gate before any message is sent | **Built and enforced** (`approvals.py` — only router allowed to trigger a send) |
+
+## Structure
 
 ```
 nava-ai-platform/

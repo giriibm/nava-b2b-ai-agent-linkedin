@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Backend local data
+backend/.env
+backend/*.db
+backend/*.db-journal
+
+# Node / frontend
+node_modules/
+.next/
+frontend/.env.local
+
+# Env files
+.env
+.env.local
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
